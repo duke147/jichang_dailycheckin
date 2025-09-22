@@ -5,9 +5,17 @@ session = requests.session()
 # email = os.environ.get('EMAIL')
 # 配置用户名对应的密码 和上面的email对应上
 # passwd = os.environ.get('PASSWD')
+# 检查环境变量是否设置
+email_env = os.environ.get('EMAIL', '').strip()
+passwd_env = os.environ.get('PASSWD', '').strip()
+
+if not email_env or not passwd_env:
+    print('❌ 失败：未获取到EMAIL或PASSWD环境变量，请检查环境变量配置')
+    exit(1)
+
 # 从设置的环境变量中的Variables多个邮箱和密码 ,分割
-emails = os.environ.get('EMAIL', '').split(',')
-passwords = os.environ.get('PASSWD', '').split(',')
+emails = email_env.split(',')
+passwords = passwd_env.split(',')
 
 # server酱
 SCKEY = os.environ.get('SCKEY')
